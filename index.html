@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PantryFlow - Dashboard Stok Digital</title>
+    <title>PantryFlow - Sinkronisasi Stok, Nol Sampah</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -39,7 +39,21 @@
                 </form>
             </section>
 
-            <section id="pantry-dashboard" class="span-two">
+            <section id="impact-section">
+                <h2>Dampak Saya (My Impact)</h2>
+                <div id="impact-metrics">
+                    <div class="metric-box">
+                        <p class="metric-value" id="total-saved">Rp 0</p>
+                        <p class="metric-label">Total Uang Dihemat (Estimasi)</p>
+                    </div>
+                    <div class="metric-box">
+                        <p class="metric-value" id="items-saved">0</p>
+                        <p class="metric-label">Item Makanan Diselamatkan</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pantry-dashboard" class="span-full">
                 <div class="dashboard-header">
                     <h2>Pantry Digital (Stok Anda)</h2>
                     <p>Stok diurutkan secara Proaktif berdasarkan Kedaluwarsa Terdekat.</p>
@@ -55,29 +69,17 @@
                     </div>
             </section>
             
-            <section id="recipe-suggestion">
+            <section id="recipe-suggestion" class="span-full">
                 <h2>Minimum-Waste Recipe Generator</h2>
-                <div id="recipe-output">
-                    <div class="recipe-card">
-                        <h3>Omelet Segera (Contoh)</h3>
-                        <p>Menggunakan stok **Merah** (Telur, Bayam). Klik tombol untuk simulasi pengurangan stok.</p>
-                        <button class="action-button" onclick="alert('Simulasi: Stok Telur dan Bayam Berkurang!')">Masak Resep Ini</button>
-                    </div>
+                
+                <div class="recipe-filters">
+                    <button class="filter-button active" data-filter="all">Semua Resep</button>
+                    <button class="filter-button" data-filter="kost">Menu Anak Kost 🧑‍🎓</button>
+                    <button class="filter-button" data-filter="quick">Cepat Saji</button>
                 </div>
-            </section>
 
-            <section id="impact-section">
-                <h2>Dampak Saya (My Impact)</h2>
-                <div id="impact-metrics">
-                    <div class="metric-box">
-                        <p class="metric-value" id="total-saved">Rp 0</p>
-                        <p class="metric-label">Total Uang Dihemat (Estimasi)</p>
+                <div id="recipe-output">
                     </div>
-                    <div class="metric-box">
-                        <p class="metric-value" id="items-saved">0</p>
-                        <p class="metric-label">Item Makanan Diselamatkan</p>
-                    </div>
-                </div>
             </section>
 
         </div>
