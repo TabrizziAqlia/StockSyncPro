@@ -14,46 +14,46 @@ const ITEM_PRICE_AVG = 15000;
 // PENTING: Anda harus mengganti link-link ini dengan link Cookpad yang sebenarnya!
 const recipeDatabase = [
     { 
-        name: "Omelet Bumbu Dasar", 
+        name: "Omelet Sayur Bumbu Dasar", 
         ingredients: ["Telur Ayam", "Bayam Segar"], 
         tags: ["quick", "kost"], 
-        cookpadLink: "https://cookpad.com/id/resep/12345678-omelet-bumbu-dasar-cepat" 
+        cookpadLink: "https://cookpad.com/id/resep/23940635" 
     },
     { 
         name: "Nasi Goreng Sederhana", 
         ingredients: ["Nasi", "Telur Ayam", "Bumbu Instan"], 
         tags: ["quick", "kost"], 
-        cookpadLink: "https://cookpad.com/id/resep/87654321-nasi-goreng-simpel-anak-kost" 
+        cookpadLink: "https://cookpad.com/id/resep/25185952" 
     },
     { 
         name: "Susu Keju Panggang", 
         ingredients: ["Susu UHT Kotak", "Keju Cheddar"], 
         tags: ["kost"], 
-        cookpadLink: "https://cookpad.com/id/resep/98765432-susu-keju-panggang-ekonomis" 
+        cookpadLink: "https://cookpad.com/id/resep/24736305" 
     },
     { 
         name: "Tumis Kangkung Pedas", 
         ingredients: ["Kangkung", "Bawang"], 
         tags: ["quick"], 
-        cookpadLink: "https://cookpad.com/id/resep/11223344-tumis-kangkung-pedas-rumahan" 
+        cookpadLink: "https://cookpad.com/id/resep/11223344" 
     },
     { 
         name: "Nasi Gila Anak Kost", 
-        ingredients: ["Nasi", "Sosis", "Telur Ayam", "Saus"], 
+        ingredients: ["Nasi", "Sosis", "Telur Ayam", "Saus Pedas"], 
         tags: ["kost", "quick"], 
-        cookpadLink: "https://cookpad.com/id/resep/44332211-nasi-gila-murah-meriah" 
+        cookpadLink: "https://cookpad.com/id/resep/15656236 " 
     },
     { 
         name: "Sup Ayam Rempah", 
-        ingredients: ["Ayam", "Wortel", "Beras 5kg"], 
+        ingredients: ["Ayam", "Wortel", "Beras"], 
         tags: ["all"], 
-        cookpadLink: "https://cookpad.com/id/resep/55667788-sup-ayam-sehat" 
+        cookpadLink: "https://cookpad.com/id/resep/55667788" 
     },
     { 
         name: "Salad Sayur Segar", 
-        ingredients: ["Bayam Segar", "Minyak Zaitun"], 
+        ingredients: ["Timun", "Wortel", "Selada", "Tomat", "Minyak Zaitun"], 
         tags: ["all"], 
-        cookpadLink: "https://cookpad.com/id/resep/99887766-salad-sayur-cepat" 
+        cookpadLink: "https://cookpad.com/id/resep/25176969" 
     },
 ];
 
