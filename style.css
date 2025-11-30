@@ -1,12 +1,12 @@
 /* Palet Warna: Hijau Impact, Biru Dongker (Outer Space), Kuning Aksen */
 :root {
-    --color-primary: #21a179;     /* Hijau Impact */
-    --color-secondary: #1A237E;   /* Biru Dongker (Outer Space/Header) */
-    --color-accent: #FFD740;      /* Kuning Aksen (Tombol Penting) */
-    --color-white: #ffffff;
-    --color-text: #333333;
-    --color-light-bg: #f8f8f8;
-    --radius-lg: 12px;
+    --color-primary: #21a179;     /* Hijau Impact */
+    --color-secondary: #1A237E;   /* Biru Dongker (Outer Space/Header) */
+    --color-accent: #FFD740;      /* Kuning Aksen (Tombol Penting) */
+    --color-white: #ffffff;
+    --color-text: #333333;
+    --color-light-bg: #f8f8f8;
+    --radius-lg: 12px;
 }
 
 /* --------------------------------------------------- */
@@ -14,28 +14,28 @@
 /* --------------------------------------------------- */
 
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: var(--color-text);
-    /* Motif Galaksi/Bintang */
-    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-    background-color: var(--color-secondary); 
-    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text);
+    /* Motif Galaksi/Bintang */
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    background-color: var(--color-secondary); 
+    line-height: 1.6;
 }
 
 main {
-    padding: 30px 20px;
-    max-width: 1300px;
-    margin: 0 auto;
+    padding: 30px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 section {
-    background-color: var(--color-white);
-    padding: 25px;
-    margin-bottom: 0px; /* Diatur oleh grid gap */
-    border-radius: var(--radius-lg);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-white);
+    padding: 25px;
+    margin-bottom: 0px; /* Diatur oleh grid gap */
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* --------------------------------------------------- */
@@ -43,52 +43,52 @@ section {
 /* --------------------------------------------------- */
 
 header {
-    background-color: var(--color-secondary);
-    color: var(--color-white);
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-    border-bottom: 5px solid var(--color-primary);
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid var(--color-primary);
 }
 
 .header-content {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .rocket-icon {
-    font-size: 2.5em; 
-    margin-right: 15px;
-    animation: bounce 2s infinite ease-in-out;
+    font-size: 2.5em; 
+    margin-right: 15px;
+    animation: bounce 2s infinite ease-in-out;
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 header h1 {
-    font-size: 2.8em;
-    margin: 0;
-    color: var(--color-accent);
-    font-weight: 900;
-    line-height: 1;
+    font-size: 2.8em;
+    margin: 0;
+    color: var(--color-accent);
+    font-weight: 900;
+    line-height: 1;
 }
 
 header p {
-    margin: 0;
-    font-style: italic;
-    color: #e0e0e0;
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.9em;
+    margin: 0;
+    font-style: italic;
+    color: #e0e0e0;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em;
 }
 
 /* --------------------------------------------------- */
@@ -96,13 +96,13 @@ header p {
 /* --------------------------------------------------- */
 
 .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Default 2 kolom */
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Default 2 kolom */
+    gap: 20px;
 }
 
 .span-full {
-    grid-column: 1 / span 2; /* Dashboard dan Resep mengambil lebar penuh */
+    grid-column: 1 / span 2; /* Dashboard dan Resep mengambil lebar penuh */
 }
 
 /* --------------------------------------------------- */
@@ -110,33 +110,34 @@ header p {
 /* --------------------------------------------------- */
 
 #add-item-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 input[type="text"], input[type="date"], input[type="number"], select {
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 button[type="submit"], .action-button {
-    padding: 12px 20px;
-    border-radius: 6px;
-    border: none;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
 }
 
 button[type="submit"]:hover, .action-button:hover {
-    background-color: #178a63;
+    background-color: #178a63;
 }
 
 /* --------------------------------------------------- */
@@ -144,182 +145,198 @@ button[type="submit"]:hover, .action-button:hover {
 /* --------------------------------------------------- */
 
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
 #item-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    min-height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: 100px;
 }
 
 .item-card {
-    padding: 15px;
-    border-radius: 10px;
-    width: 180px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 0.9em;
-    transition: transform 0.2s;
-    position: relative;
+    padding: 15px;
+    border-radius: 10px;
+    width: 180px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    transition: transform 0.2s;
+    position: relative;
 }
 
 .item-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .item-card strong {
-    font-size: 1.1em;
-    display: block;
-    margin-bottom: 5px;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
 }
 
 /* LOGIKA VISUAL WARNA PERINGATAN (Novelty Non-AI) */
-.status-merah { 
-    background-color: #ffe6e6; 
-    border: 2px solid #e74c3c; 
-    color: #e74c3c;
+.status-merah { 
+    background-color: #ffe6e6; 
+    border: 2px solid #e74c3c; 
+    color: #e74c3c;
 }
 
-.status-kuning { 
-    background-color: #fff9e6;
-    border: 2px solid #f39c12; 
-    color: #f39c12;
+.status-kuning { 
+    background-color: #fff9e6;
+    border: 2px solid #f39c12; 
+    color: #f39c12;
 }
 
-.status-hijau { 
-    background-color: #e6ffe6;
-    border: 2px solid #27ae60;
-    color: #27ae60;
+.status-hijau { 
+    background-color: #e6ffe6;
+    border: 2px solid #27ae60;
+    color: #27ae60;
 }
 
 .days-left {
-    font-weight: bold;
-    display: block;
-    margin-top: 5px;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
 }
 
 /* --------------------------------------------------- */
 /* IMPACT SECTION & RECIPE */
 /* --------------------------------------------------- */
 
+#impact-metrics {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+}
+
 .metric-box {
-    text-align: center;
-    padding: 15px;
-    background-color: var(--color-light-bg);
-    border-radius: 8px;
-    flex: 1;
+    text-align: center;
+    padding: 15px;
+    background-color: var(--color-light-bg);
+    border-radius: 8px;
+    flex: 1;
 }
 
 .metric-value {
-    font-size: 2em;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin: 0;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
 }
 
 .metric-label {
-    font-size: 0.9em;
-    color: #666;
-    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
 }
 
 .recipe-filters {
-    margin-bottom: 15px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .filter-button {
-    padding: 8px 15px;
-    border-radius: 20px;
-    border: 1px solid var(--color-primary);
-    background-color: var(--color-white);
-    color: var(--color-primary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9em;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
 }
 
 .filter-button:hover {
-    background-color: #e6ffe6;
+    background-color: #e6ffe6;
 }
 
 .filter-button.active {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
 }
 
 .recipe-output-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .recipe-card {
-    background-color: var(--color-light-bg);
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    background-color: var(--color-light-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .recipe-card h3 {
-    margin-top: 0;
-    color: var(--color-secondary);
+    margin-top: 0;
+    color: var(--color-secondary);
 }
 
+/* Styling specifically for the Maps button to differentiate */
+.recipe-card .action-button[style*="background-color: #3498db;"] {
+    margin-top: 10px;
+}
 
 /* Footer */
 footer {
-    background-color: var(--color-secondary);
-    color: #e0e0e0;
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
+    background-color: var(--color-secondary);
+    color: #e0e0e0;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
 }
 
 /* --------------------------------------------------- */
 /* RESPONSIVENESS */
 /* --------------------------------------------------- */
 @media (max-width: 1024px) {
-    .content-grid {
-        grid-template-columns: 1fr; /* Kolom tunggal di layar tablet/kecil */
-    }
-    .span-full {
-        grid-column: 1;
-    }
-    .dashboard-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+    .content-grid {
+        grid-template-columns: 1fr; /* Kolom tunggal di layar tablet/kecil */
+    }
+    .span-full {
+        grid-column: 1;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 @media (max-width: 600px) {
-    .item-card {
-        width: 100%;
-        max-width: none;
-    }
-    .metric-box {
-        padding: 10px;
-    }
-    header h1 {
-        font-size: 2em;
-    }
-    .rocket-icon {
-        font-size: 2em;
-        margin-right: 10px;
-    }
-    .header-content {
-        padding: 0 20px;
-    }
-    .recipe-filters {
-        justify-content: space-between;
+    .item-card {
+        width: 100%;
+        max-width: none;
+    }
+    .metric-box {
+        padding: 10px;
+    }
+    header h1 {
+        font-size: 2em;
+    }
+    .rocket-icon {
+        font-size: 2em;
+        margin-right: 10px;
+    }
+    .header-content {
+        padding: 0 20px;
+    }
+    .recipe-filters {
+        justify-content: space-between;
+    }
+    #impact-metrics {
+        flex-direction: column;
     }
 }
