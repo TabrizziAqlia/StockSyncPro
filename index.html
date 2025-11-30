@@ -4,41 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PantryFlow - Dashboard Stok Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>PantryFlow</h1>
-        <p>Sinkronisasi Stok, Nol Sampah</p>
+        <div class="header-content">
+            <div class="rocket-icon">🚀</div> 
+            <h1>PantryFlow</h1>
+            <p>Sinkronisasi Stok, Nol Sampah</p>
+        </div>
     </header>
 
     <main>
-        <section id="input-section">
-            <h2>Tambah Stok Cepat</h2>
-            <form id="add-item-form">
-                <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Saus Tomat)" required>
-                <input type="date" id="exp-date" required>
-                <input type="number" id="quantity" placeholder="Qty" required min="1">
-                <button type="submit">Tambah ke Pantry</button>
-            </form>
-        </section>
+        <div class="content-grid">
+            
+            <section id="input-section">
+                <h2>Tambah Stok Cepat</h2>
+                <form id="add-item-form">
+                    <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Saus Tomat)" required>
+                    
+                    <select id="item-category" required>
+                        <option value="" disabled selected>Pilih Kategori (Untuk Estimasi ED)</option>
+                        <option value="Sayur Segar">Sayur Segar (ED ±5 hari)</option>
+                        <option value="Daging/Ikan">Daging/Ikan (ED ±7 hari)</option>
+                        <option value="Susu/Telur">Susu/Telur (ED ±14 hari)</option>
+                        <option value="Kering">Kering (ED Jangka Panjang)</option>
+                    </select>
 
-        <section id="pantry-dashboard">
-            <h2>Pantry Digital (Stok Anda)</h2>
-            <p>Stok diurutkan secara Proaktif berdasarkan Kedaluwarsa Terdekat.</p>
-            <div id="item-list">
+                    <input type="date" id="exp-date" required>
+                    <input type="number" id="quantity" placeholder="Qty" required min="1">
+                    <button type="submit">Tambah ke Pantry</button>
+                </form>
+            </section>
+
+            <section id="pantry-dashboard" class="span-two">
+                <div class="dashboard-header">
+                    <h2>Pantry Digital (Stok Anda)</h2>
+                    <p>Stok diurutkan secara Proaktif berdasarkan Kedaluwarsa Terdekat.</p>
+                    <div class="filter-controls">
+                        <label for="sort-by">Urutkan:</label>
+                        <select id="sort-by" onchange="renderPantry()">
+                            <option value="exp-asc">Kedaluwarsa Terdekat</option>
+                            <option value="name-asc">Nama A-Z</option>
+                        </select>
+                    </div>
                 </div>
-        </section>
-        
-        <section id="recipe-suggestion">
-            <h2>Minimum-Waste Recipe Generator</h2>
-            <p>Resep direkomendasikan menggunakan bahan yang harus segera dihabiskan.</p>
-            <div class="recipe-card">
-                <h3>Resep: Omelet Sayur Cepat</h3>
-                <p>Menggunakan Telur dan Bayam (Stok Merah).</p>
-            </div>
-        </section>
+                <div id="item-list">
+                    </div>
+            </section>
+            
+            <section id="recipe-suggestion">
+                <h2>Minimum-Waste Recipe Generator</h2>
+                <div id="recipe-output">
+                    <div class="recipe-card">
+                        <h3>Omelet Segera (Contoh)</h3>
+                        <p>Menggunakan stok **Merah** (Telur, Bayam). Klik tombol untuk simulasi pengurangan stok.</p>
+                        <button class="action-button" onclick="alert('Simulasi: Stok Telur dan Bayam Berkurang!')">Masak Resep Ini</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="impact-section">
+                <h2>Dampak Saya (My Impact)</h2>
+                <div id="impact-metrics">
+                    <div class="metric-box">
+                        <p class="metric-value" id="total-saved">Rp 0</p>
+                        <p class="metric-label">Total Uang Dihemat (Estimasi)</p>
+                    </div>
+                    <div class="metric-box">
+                        <p class="metric-value" id="items-saved">0</p>
+                        <p class="metric-label">Item Makanan Diselamatkan</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </main>
 
     <footer>
