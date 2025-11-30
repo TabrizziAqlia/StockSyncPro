@@ -18,9 +18,9 @@ body {
     margin: 0;
     padding: 0;
     color: var(--color-text);
-    /* Motif Galaksi/Bintang - Subtle */
+    /* Motif Galaksi/Bintang */
     background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-    background-color: var(--color-secondary); /* Biru Dongker */
+    background-color: var(--color-secondary); 
     line-height: 1.6;
 }
 
@@ -33,7 +33,7 @@ main {
 section {
     background-color: var(--color-white);
     padding: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 0px; /* Diatur oleh grid gap */
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
@@ -54,7 +54,7 @@ header {
 .header-content {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +64,7 @@ header {
 .rocket-icon {
     font-size: 2.5em; 
     margin-right: 15px;
-    animation: bounce 2s infinite ease-in-out; /* Tambahkan sedikit animasi */
+    animation: bounce 2s infinite ease-in-out;
 }
 
 @keyframes bounce {
@@ -97,12 +97,12 @@ header p {
 
 .content-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr; /* 3 kolom: Input, Recipe, Impact */
+    grid-template-columns: 1fr 1fr; /* Default 2 kolom */
     gap: 20px;
 }
 
-.span-two {
-    grid-column: 1 / span 3; /* Dashboard mengambil lebar penuh */
+.span-full {
+    grid-column: 1 / span 2; /* Dashboard dan Resep mengambil lebar penuh */
 }
 
 /* --------------------------------------------------- */
@@ -207,25 +207,6 @@ button[type="submit"]:hover, .action-button:hover {
 /* IMPACT SECTION & RECIPE */
 /* --------------------------------------------------- */
 
-#recipe-suggestion h2, #impact-section h2 {
-    color: var(--color-secondary);
-}
-
-.recipe-card {
-    background-color: var(--color-light-bg);
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-    text-align: center;
-}
-
-#impact-metrics {
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
-    margin-top: 20px;
-}
-
 .metric-box {
     text-align: center;
     padding: 15px;
@@ -247,6 +228,54 @@ button[type="submit"]:hover, .action-button:hover {
     margin: 0;
 }
 
+.recipe-filters {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.filter-button:hover {
+    background-color: #e6ffe6;
+}
+
+.filter-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.recipe-output-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.recipe-card {
+    background-color: var(--color-light-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.recipe-card h3 {
+    margin-top: 0;
+    color: var(--color-secondary);
+}
+
+
 /* Footer */
 footer {
     background-color: var(--color-secondary);
@@ -263,7 +292,7 @@ footer {
     .content-grid {
         grid-template-columns: 1fr; /* Kolom tunggal di layar tablet/kecil */
     }
-    .span-two {
+    .span-full {
         grid-column: 1;
     }
     .dashboard-header {
@@ -275,6 +304,7 @@ footer {
 @media (max-width: 600px) {
     .item-card {
         width: 100%;
+        max-width: none;
     }
     .metric-box {
         padding: 10px;
@@ -283,6 +313,13 @@ footer {
         font-size: 2em;
     }
     .rocket-icon {
-        left: 10px;
+        font-size: 2em;
+        margin-right: 10px;
+    }
+    .header-content {
+        padding: 0 20px;
+    }
+    .recipe-filters {
+        justify-content: space-between;
     }
 }
