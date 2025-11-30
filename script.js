@@ -1,12 +1,5 @@
 // --- DATABASE MOCKUP ---
-let pantryItems = [
-    // Data stok awal untuk demo (Bayam & Susu Merah, Telur Kuning)
-    { name: "Bayam Segar", expDate: "2025-12-03", qty: 1, estimatedPrice: 5000 },    
-    { name: "Telur Ayam", expDate: "2025-12-08", qty: 10, estimatedPrice: 24000 }, 
-    { name: "Susu UHT Kotak", expDate: "2025-12-05", qty: 2, estimatedPrice: 15000 }, 
-    { name: "Keju Cheddar", expDate: "2025-12-18", qty: 1, estimatedPrice: 15000 },   
-    { name: "Beras 5kg", expDate: "2026-06-15", qty: 1, estimatedPrice: 65000 }      
-];
+let pantryItems = [];
 
 let itemsSaved = 0; 
 const ITEM_PRICE_AVG = 15000; 
