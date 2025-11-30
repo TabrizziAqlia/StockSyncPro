@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSync Pro - Pantry Digital</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>StockSync Pro</h1>
+        <nav>
+            <a href="#dashboard" class="active">Pantry Digital</a>
+            <a href="#recipes">AI Recipe Generator</a>
+            <a href="#shopping">Smart Shopping List</a>
+            <a href="#">Profile</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard" class="content-section">
+            <h2>Pantry Digital Anda</h2>
+            <div class="summary-bar">
+                <button id="input-cepat-btn">+ Input Cepat (Scan/Voice)</button>
+                <p>Potensi Penghematan Bulan Ini: <strong>Rp 120.000</strong></p>
+                <p>Item Segera Kadaluarsa: <span id="expired-count">3</span></p>
+            </div>
+            
+            <div class="pantry-grid" id="pantry-list">
+                <div class="item-card red" data-name="Susu UHT" data-exp="3 hari">
+                    <h3>Susu UHT</h3>
+                    <p>Sisa: 1 Kotak</p>
+                    <p class="warning-text">Kadaluarsa: <strong>3 Hari Lagi</strong></p>
+                </div>
+                <div class="item-card yellow" data-name="Telur Ayam" data-exp="5 hari">
+                    <h3>Telur Ayam</h3>
+                    <p>Sisa: 5 Butir</p>
+                    <p class="warning-text">Kadaluarsa: <strong>5 Hari Lagi</strong></p>
+                </div>
+                <div class="item-card yellow" data-name="Daging Giling" data-exp="6 hari">
+                    <h3>Daging Giling</h3>
+                    <p>Sisa: 250 gram</p>
+                    <p class="warning-text">Kadaluarsa: <strong>6 Hari Lagi</strong></p>
+                </div>
+                <div class="item-card green" data-name="Beras" data-exp="120 hari">
+                    <h3>Beras</h3>
+                    <p>Sisa: 5 kg</p>
+                    <p class="warning-text">Kadaluarsa: 120 Hari Lagi</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="recipes" class="content-section hidden">
+            <h2>AI Recipe Generator (Minimum-Waste)</h2>
+            <p>**REKOMENDASI: Resep yang Memanfaatkan Stok Anda yang Akan Kadaluarsa!**</p>
+            <div class="recipe-grid" id="recipe-list">
+                </div>
+        </section>
+        
+        <section id="shopping" class="content-section hidden">
+            <h2>Smart Shopping List</h2>
+            <p>Fitur ini menggunakan AI untuk membuat daftar belanja otomatis berdasarkan item yang habis dan resep yang Anda pilih. Langsung terhubung ke mitra *e-groceries* kami untuk komisi *affiliate*.</p>
+            <ul>
+                <li>Tomat (Stok Habis - Kebutuhan Resep)</li>
+                <li>Minyak Goreng (Stok Hampir Habis)</li>
+                <li><a href="#" class="affiliate-link">Beli di Mitra A</a> | <a href="#" class="affiliate-link">Beli di Mitra B</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
