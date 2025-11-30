@@ -33,7 +33,7 @@ main {
 section {
     background-color: var(--color-white);
     padding: 25px;
-    margin-bottom: 0px; /* Diatur oleh grid gap */
+    margin-bottom: 0px; 
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
@@ -97,12 +97,12 @@ header p {
 
 .content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Default 2 kolom */
+    grid-template-columns: 1fr 1fr; 
     gap: 20px;
 }
 
 .span-full {
-    grid-column: 1 / span 2; /* Dashboard dan Resep mengambil lebar penuh */
+    grid-column: 1 / span 2; 
 }
 
 /* --------------------------------------------------- */
@@ -133,7 +133,7 @@ button[type="submit"], .action-button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
-    text-decoration: none;
+    text-decoration: none;
 }
 
 button[type="submit"]:hover, .action-button:hover {
@@ -141,7 +141,7 @@ button[type="submit"]:hover, .action-button:hover {
 }
 
 /* --------------------------------------------------- */
-/* PANTRY DASHBOARD (SMART SORTING) */
+/* PANTRY DASHBOARD & ITEM CARDS */
 /* --------------------------------------------------- */
 
 .dashboard-header {
@@ -157,6 +157,7 @@ button[type="submit"]:hover, .action-button:hover {
     flex-wrap: wrap;
     gap: 15px;
     min-height: 100px;
+    width: 100%; /* Penting untuk empty message */
 }
 
 .item-card {
@@ -179,7 +180,7 @@ button[type="submit"]:hover, .action-button:hover {
     margin-bottom: 5px;
 }
 
-/* LOGIKA VISUAL WARNA PERINGATAN (Novelty Non-AI) */
+/* LOGIKA VISUAL WARNA PERINGATAN */
 .status-merah { 
     background-color: #ffe6e6; 
     border: 2px solid #e74c3c; 
@@ -204,14 +205,44 @@ button[type="submit"]:hover, .action-button:hover {
     margin-top: 5px;
 }
 
+/* *** TAMBAHAN: STYLES UNTUK PESAN KOSONG PANTRY (Lebih Rapi) *** */
+.empty-message {
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    background-color: #fff;
+    border: 2px dashed #95a5a6; /* Border abu-abu putus-putus */
+    border-radius: 10px;
+    color: #666;
+    margin: 20px auto;
+}
+
+.empty-message h3 {
+    color: var(--color-secondary);
+    margin-top: 0;
+}
+
+/* *** TAMBAHAN: STYLES UNTUK PESAN KOSONG RESEP (Lebih Rapi) *** */
+.empty-message-recipe {
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    background-color: #ecf0f1; /* Warna abu-abu yang lebih terang */
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    color: #34495e;
+    grid-column: 1 / span 2;
+}
+
+
 /* --------------------------------------------------- */
 /* IMPACT SECTION & RECIPE */
 /* --------------------------------------------------- */
 
 #impact-metrics {
-    display: flex;
-    gap: 20px;
-    justify-content: space-around;
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
 }
 
 .metric-box {
@@ -275,9 +306,9 @@ button[type="submit"]:hover, .action-button:hover {
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .recipe-card h3 {
@@ -287,7 +318,7 @@ button[type="submit"]:hover, .action-button:hover {
 
 /* Styling specifically for the Maps button to differentiate */
 .recipe-card .action-button[style*="background-color: #3498db;"] {
-    margin-top: 10px;
+    margin-top: 10px;
 }
 
 /* Footer */
@@ -336,7 +367,7 @@ footer {
     .recipe-filters {
         justify-content: space-between;
     }
-    #impact-metrics {
-        flex-direction: column;
-    }
+    #impact-metrics {
+        flex-direction: column;
+    }
 }
