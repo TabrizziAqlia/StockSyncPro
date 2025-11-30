@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PantryFlow - Sinkronisasi Stok, Nol Sampah</title>
+    <title>PantryFlow - Sinkronisasi Stok, Non Sampah</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,7 @@
         <div class="header-content">
             <div class="rocket-icon">🚀</div> 
             <h1>PantryFlow</h1>
-            <p>Sinkronisasi Stok, Nol Sampah</p>
+            <p>Sinkronisasi Stok, Non Sampah</p>
         </div>
     </header>
 
@@ -23,13 +23,21 @@
             <section id="input-section">
                 <h2>Tambah Stok Cepat</h2>
                 <form id="add-item-form">
-                    <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Saus Tomat)" required>
+                    <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Beras, Susu)" required>
                     
                     <select id="item-category" required>
-                        <option value="" disabled selected>Pilih Kategori (Untuk Estimasi ED)</option>
+                        <option value="" disabled selected>Pilih Kategori Simpan Kulkas (Untuk Estimasi ED)</option>
                         <option value="Sayur Segar">Sayur Segar (ED ±5 hari)</option>
-                        <option value="Daging/Ikan">Daging/Ikan (ED ±7 hari)</option>
-                        <option value="Susu/Telur">Susu/Telur (ED ±14 hari)</option>
+                        <option value="Daging/Ikan">Daging/Ikan (ED ±5 hari)</option>
+                        <option value="Susu UHT/Telur">Susu/Telur (ED ±21 hari)</option>
+                        <option value="Kering">Kering (ED Jangka Panjang)</option>
+                    </select>
+
+                     <select id="item-category" required>
+                        <option value="" disabled selected>Pilih Kategori Non Kulkas (Untuk Estimasi ED)</option>
+                        <option value="Sayur Segar">Sayur Segar (ED ±2 hari)</option>
+                        <option value="Daging/Ikan">Daging/Ikan (ED ±12 jam)</option>
+                        <option value="Susu UHT/Telur">Susu/Telur (ED ±14 hari)</option>
                         <option value="Kering">Kering (ED Jangka Panjang)</option>
                     </select>
 
@@ -40,7 +48,7 @@
             </section>
 
             <section id="impact-section">
-                <h2>Dampak Saya (My Impact)</h2>
+                <h2>Dampak Saya </h2>
                 <div id="impact-metrics">
                     <div class="metric-box">
                         <p class="metric-value" id="total-saved">Rp 0</p>
