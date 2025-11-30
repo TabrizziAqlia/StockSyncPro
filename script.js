@@ -1,30 +1,65 @@
 // --- DATABASE MOCKUP ---
 let pantryItems = [
-    // Contoh Data Awal untuk Pitch: Menunjukkan semua status warna
-    { name: "Bayam Segar", expDate: "2025-12-03", qty: 1, estimatedPrice: 5000 },    // Merah
-    { name: "Telur Ayam", expDate: "2025-12-08", qty: 10, estimatedPrice: 24000 }, // Kuning
-    { name: "Susu UHT Kotak", expDate: "2025-12-05", qty: 2, estimatedPrice: 15000 }, // Merah
-    { name: "Keju Cheddar", expDate: "2025-12-18", qty: 1, estimatedPrice: 15000 },   // Kuning
-    { name: "Beras 5kg", expDate: "2026-06-15", qty: 1, estimatedPrice: 65000 }      // Hijau
+    { name: "Bayam Segar", expDate: "2025-12-03", qty: 1, estimatedPrice: 5000 },    
+    { name: "Telur Ayam", expDate: "2025-12-08", qty: 10, estimatedPrice: 24000 }, 
+    { name: "Susu UHT Kotak", expDate: "2025-12-05", qty: 2, estimatedPrice: 15000 }, 
+    { name: "Keju Cheddar", expDate: "2025-12-18", qty: 1, estimatedPrice: 15000 },   
+    { name: "Beras 5kg", expDate: "2026-06-15", qty: 1, estimatedPrice: 65000 }      
 ];
 
-let itemsSaved = 0; // Metrik untuk Impact
-const ITEM_PRICE_AVG = 15000; // Harga rata-rata item yang diselamatkan (simulasi)
+let itemsSaved = 0; 
+const ITEM_PRICE_AVG = 15000; 
 
-// DATABASE RESEP DUMMY dengan TAGGING (NON-AI)
+// NEW: DATABASE RESEP DUMMY dengan TAGGING DAN LINK COOKPAD
+// PENTING: Anda harus mengganti link-link ini dengan link Cookpad yang sebenarnya!
 const recipeDatabase = [
-    { name: "Omelet Bumbu Dasar", ingredients: ["Telur Ayam", "Bayam Segar"], tags: ["quick", "kost"] },
-    { name: "Nasi Goreng Sederhana", ingredients: ["Nasi", "Telur Ayam", "Bumbu Instan"], tags: ["quick", "kost"] },
-    { name: "Susu Keju Panggang", ingredients: ["Susu UHT Kotak", "Keju Cheddar"], tags: ["kost"] },
-    { name: "Tumis Kangkung Pedas", ingredients: ["Kangkung", "Bawang"], tags: ["quick"] },
-    { name: "Nasi Gila Anak Kost", ingredients: ["Nasi", "Sosis", "Telur Ayam", "Saus"], tags: ["kost", "quick"] },
-    { name: "Sup Ayam Rempah", ingredients: ["Ayam", "Wortel", "Beras 5kg"], tags: ["all"] },
-    { name: "Salad Sayur Segar", ingredients: ["Bayam Segar", "Minyak Zaitun"], tags: ["all"] },
+    { 
+        name: "Omelet Bumbu Dasar", 
+        ingredients: ["Telur Ayam", "Bayam Segar"], 
+        tags: ["quick", "kost"], 
+        cookpadLink: "https://cookpad.com/id/resep/12345678-omelet-bumbu-dasar-cepat" 
+    },
+    { 
+        name: "Nasi Goreng Sederhana", 
+        ingredients: ["Nasi", "Telur Ayam", "Bumbu Instan"], 
+        tags: ["quick", "kost"], 
+        cookpadLink: "https://cookpad.com/id/resep/87654321-nasi-goreng-simpel-anak-kost" 
+    },
+    { 
+        name: "Susu Keju Panggang", 
+        ingredients: ["Susu UHT Kotak", "Keju Cheddar"], 
+        tags: ["kost"], 
+        cookpadLink: "https://cookpad.com/id/resep/98765432-susu-keju-panggang-ekonomis" 
+    },
+    { 
+        name: "Tumis Kangkung Pedas", 
+        ingredients: ["Kangkung", "Bawang"], 
+        tags: ["quick"], 
+        cookpadLink: "https://cookpad.com/id/resep/11223344-tumis-kangkung-pedas-rumahan" 
+    },
+    { 
+        name: "Nasi Gila Anak Kost", 
+        ingredients: ["Nasi", "Sosis", "Telur Ayam", "Saus"], 
+        tags: ["kost", "quick"], 
+        cookpadLink: "https://cookpad.com/id/resep/44332211-nasi-gila-murah-meriah" 
+    },
+    { 
+        name: "Sup Ayam Rempah", 
+        ingredients: ["Ayam", "Wortel", "Beras 5kg"], 
+        tags: ["all"], 
+        cookpadLink: "https://cookpad.com/id/resep/55667788-sup-ayam-sehat" 
+    },
+    { 
+        name: "Salad Sayur Segar", 
+        ingredients: ["Bayam Segar", "Minyak Zaitun"], 
+        tags: ["all"], 
+        cookpadLink: "https://cookpad.com/id/resep/99887766-salad-sayur-cepat" 
+    },
 ];
 
 let currentFilter = 'all'; // Default filter
 
-// --- LOGIKA PERHITUNGAN & STATUS ---
+// --- LOGIKA PERHITUNGAN & STATUS (Sama seperti sebelumnya) ---
 
 function calculateDaysRemaining(expDate) {
     const today = new Date();
@@ -39,20 +74,19 @@ function getStatusClass(days) {
     if (days <= 0) { 
         return 'status-merah'; 
     } else if (days <= 7) {
-        return 'status-merah'; // Kedaluwarsa dalam 7 hari atau kurang
+        return 'status-merah'; 
     } else if (days <= 14) {
-        return 'status-kuning'; // Kedaluwarsa antara 8 hingga 14 hari
+        return 'status-kuning'; 
     } else {
-        return 'status-hijau'; // Kedaluwarsa lebih dari 14 hari
+        return 'status-hijau'; 
     }
 }
 
-// --- LOGIKA UTAMA: SMART SORTING & VISUALISASI ---
+// --- LOGIKA UTAMA: SMART SORTING & VISUALISASI PANTRY ---
 
 function renderPantry() {
     const sortBy = document.getElementById('sort-by').value;
 
-    // 1. Algoritma Smart Sorting (NON-AI NOVELTY)
     if (sortBy === 'exp-asc') {
         pantryItems.sort((a, b) => new Date(a.expDate) - new Date(b.expDate));
     } else if (sortBy === 'name-asc') {
@@ -83,7 +117,7 @@ function renderPantry() {
     updateImpactMetrics();
 }
 
-// --- LOGIKA PENAMBAHAN ITEM (NON-AI) ---
+// --- LOGIKA PENAMBAHAN ITEM (Sama seperti sebelumnya) ---
 
 document.getElementById('add-item-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -93,7 +127,6 @@ document.getElementById('add-item-form').addEventListener('submit', function(e) 
     const qty = parseInt(document.getElementById('quantity').value);
     const category = document.getElementById('item-category').value;
     
-    // Asumsi harga acak
     const estimatedPrice = Math.floor(Math.random() * 50000) + 5000; 
 
     if (name && date && qty > 0 && category) {
@@ -110,32 +143,27 @@ document.getElementById('add-item-form').addEventListener('submit', function(e) 
     }
 });
 
-// --- LOGIKA FILTERING RESEP BARU (NON-AI) ---
+// --- LOGIKA FILTERING & RENDERING RESEP DENGAN LINK COOKPAD ---
 
 function renderRecipes() {
     const outputContainer = document.getElementById('recipe-output');
     outputContainer.innerHTML = '';
     
-    // 1. Tentukan bahan yang paling mendesak (Stok Merah dan Kuning)
     const urgentItems = pantryItems.filter(item => {
         const status = getStatusClass(calculateDaysRemaining(item.expDate));
         return status === 'status-merah' || status === 'status-kuning';
     });
     const urgentNames = urgentItems.map(item => item.name);
     
-    // 2. Filter resep berdasarkan kategori (Menu Anak Kost, Quick, All)
     const filteredRecipes = recipeDatabase.filter(recipe => {
         if (currentFilter === 'all') return true;
         return recipe.tags.includes(currentFilter);
     });
 
-    // 3. Terapkan Logika Smart Matching: Resep yang menggunakan bahan stok Merah/Kuning
     const matchedRecipes = filteredRecipes.filter(recipe => {
-        // Cek apakah minimal 1 bahan dari resep ada di daftar stok mendesak
         return recipe.ingredients.some(ing => urgentNames.includes(ing));
     });
     
-    // Render Output
     const gridContainer = document.createElement('div');
     gridContainer.className = 'recipe-output-grid';
 
@@ -146,11 +174,12 @@ function renderRecipes() {
             
             const savedIngredients = recipe.ingredients.filter(ing => urgentNames.includes(ing)).join(', ');
 
+            // Tombol diubah menjadi elemen <a> (tautan) dengan class action-button
             recipeCard.innerHTML = `
                 <h3>${recipe.name}</h3>
                 <p><strong>Bahan Mendesak:</strong> ${savedIngredients}</p>
                 <p><small>Tags: ${recipe.tags.join(', ')}</small></p>
-                <button class="action-button" onclick="handleRecipeCooked('${recipe.name}')">Masak Resep Ini</button>
+                <a href="${recipe.cookpadLink}" target="_blank" class="action-button">Masak Resep Ini</a>
             `;
             gridContainer.appendChild(recipeCard);
         });
@@ -170,39 +199,36 @@ document.querySelectorAll('.filter-button').forEach(button => {
     });
 });
 
-// Handler untuk simulasi memasak (mengurangi stok dan update impact)
-function handleRecipeCooked(recipeName) {
-    // Di dunia nyata: Kurangi item yang digunakan dari pantryItems
-    // Untuk Pitch: Tambahkan ke metrik Impact
-    
-    // Asumsi: Setiap resep menyelamatkan 2 item dan menghemat 20.000 Rupiah
-    const savedAmount = 20000;
-    const savedItemsCount = 2;
-
-    itemsSaved += savedItemsCount; 
-    
-    // Update simulasi harga rata-rata
-    // ITEM_PRICE_AVG harusnya dihitung dari data user, ini hanya simulasi
-    
-    alert(`Sukses! Anda memasak ${recipeName} dan menyelamatkan ${savedItemsCount} item dari pemborosan. Total hemat Anda bertambah!`);
-    
-    renderPantry();
-}
-
-
 // --- LOGIKA DAMPAK SAYA (IMPACT METRICS) ---
 
 function updateImpactMetrics() {
-    // Hitung total uang yang diselamatkan (simulasi)
-    const totalSavedValue = itemsSaved * (ITEM_PRICE_AVG / 2); // Nilai yang diselamatkan (misal setengah harga rata-rata)
+    const totalSavedValue = itemsSaved * (ITEM_PRICE_AVG / 2); 
     
     document.getElementById('total-saved').textContent = `Rp ${totalSavedValue.toLocaleString('id-ID')}`;
     document.getElementById('items-saved').textContent = itemsSaved;
 }
 
+// Simulasi untuk menunjukkan bahwa "Masak Resep Ini" berkontribusi ke Impact
+// Di dunia nyata, ini akan terhubung dengan pengurangan stok aktual
+// dan mungkin konfirmasi dari user bahwa resep sudah dimasak.
+// Untuk tujuan demo, kita bisa menambahkan fungsi ini.
+function simulateCookingAndImpact() {
+    itemsSaved += 2; // Asumsi 2 item diselamatkan per resep
+    // alert("Sukses! Anda berhasil memasak dan mengurangi pemborosan. Cek Dampak Saya!");
+    updateImpactMetrics(); // Langsung update metrics tanpa alert
+}
+
+// Tambahkan event listener ke setiap link resep (setelah mereka dirender)
+// Ini adalah fitur yang akan dipanggil ketika link Cookpad diklik
+// Dengan adanya link Cookpad, tombol "Masak Resep Ini" tidak perlu memanggil alert,
+// tapi bisa langsung menambahkan ke impact metrics.
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.classList.contains('action-button')) {
+        simulateCookingAndImpact(); // Panggil fungsi simulasi dampak
+    }
+});
 
 // Jalankan render pertama kali saat website dimuat
 document.addEventListener('DOMContentLoaded', () => {
     renderPantry();
-    // renderRecipes(); // Dipanggil di dalam renderPantry
 });
