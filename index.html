@@ -1,102 +1,110 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PantryFlow - Sinkronisasi Stok, Non Sampah</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PantryFlow - Sinkronisasi Stok, Non Sampah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <div class="rocket-icon">🚀</div> 
-            <h1>PantryFlow</h1>
-            <p>Sinkronisasi Stok, Non Sampah</p>
-        </div>
-    </header>
+    <header>
+        <div class="header-content">
+            <div class="rocket-icon">🚀</div> 
+            <h1>PantryFlow</h1>
+            <p>Sinkronisasi Stok, Non Sampah</p>
+        </div>
+    </header>
 
-    <main>
-        <div class="content-grid">
-            
-            <section id="input-section">
-                <h2>Tambah Stok Cepat</h2>
-                <form id="add-item-form">
-                    <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Beras, Susu)" required>
-                    
-                    <select id="item-category" required>
-                        <option value="" disabled selected>Pilih Kategori Simpan Kulkas (Untuk Estimasi ED)</option>
-                        <option value="Sayur Segar">Sayur Segar (ED ±5 hari)</option>
-                        <option value="Daging/Ikan">Daging/Ikan (ED ±5 hari)</option>
-                        <option value="Susu UHT/Telur">Susu/Telur (ED ±21 hari)</option>
-                        <option value="Kering">Kering (ED Jangka Panjang)</option>
-                    </select>
+    <main>
+        <div class="content-grid">
+            
+            <section id="input-section">
+                <h2>Tambah Stok Cepat</h2>
+                <form id="add-item-form">
+                    <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Beras, Susu)" required>
+                    
+                    <select id="item-category" required>
+                        <option value="" disabled selected>Pilih Kategori Simpan Kulkas (Untuk Estimasi ED)</option>
+                        <option value="Sayur Segar">Sayur Segar (ED ±5 hari)</option>
+                        <option value="Daging/Ikan">Daging/Ikan (ED ±5 hari)</option>
+                        <option value="Susu UHT/Telur">Susu/Telur (ED ±21 hari)</option>
+                        <option value="Kering">Kering (ED Jangka Panjang)</option>
+                    </select>
 
-                     <select id="item-category" required>
-                        <option value="" disabled selected>Pilih Kategori Non Kulkas (Untuk Estimasi ED)</option>
-                        <option value="Sayur Segar">Sayur Segar (ED ±2 hari)</option>
-                        <option value="Daging/Ikan">Daging/Ikan (ED ±12 jam)</option>
-                        <option value="Susu UHT/Telur">Susu/Telur (ED ±14 hari)</option>
-                        <option value="Kering">Kering (ED Jangka Panjang)</option>
-                    </select>
+                     <select id="item-category" required>
+                        <option value="" disabled selected>Pilih Kategori Non Kulkas (Untuk Estimasi ED)</option>
+                        <option value="Sayur Segar">Sayur Segar (ED ±2 hari)</option>
+                        <option value="Daging/Ikan">Daging/Ikan (ED ±12 jam)</option>
+                        <option value="Susu UHT/Telur">Susu/Telur (ED ±14 hari)</option>
+                        <option value="Kering">Kering (ED Jangka Panjang)</option>
+                    </select>
 
-                    <input type="date" id="exp-date" required>
-                    <input type="number" id="quantity" placeholder="Qty" required min="1">
-                    <button type="submit">Tambah ke Pantry</button>
-                </form>
+                    <input type="date" id="exp-date" required>
+                    <input type="number" id="quantity" placeholder="Qty" required min="1">
+                    <button type="submit">Tambah ke Pantry</button>
+                </form>
+            </section>
+
+            <section id="impact-section">
+                <h2>Dampak Saya </h2>
+                <div id="impact-metrics">
+                    <div class="metric-box">
+                        <p class="metric-value" id="total-saved">Rp 0</p>
+                        <p class="metric-label">Total Uang Dihemat (Estimasi)</p>
+                    </div>
+                    <div class="metric-box">
+                        <p class="metric-value" id="items-saved">0</p>
+                        <p class="metric-label">Item Makanan Diselamatkan</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pantry-dashboard" class="span-full">
+                <div class="dashboard-header">
+                    <h2>Pantry Digital (Stok Anda)</h2>
+                    <p>Stok diurutkan secara Proaktif berdasarkan Kedaluwarsa Terdekat.</p>
+                    <div class="filter-controls">
+                        <label for="sort-by">Urutkan:</label>
+                        <select id="sort-by" onchange="renderPantry()">
+                            <option value="exp-asc">Kedaluwarsa Terdekat</option>
+                            <option value="name-asc">Nama A-Z</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="item-list">
+                    </div>
+            </section>
+            
+            <section id="recipe-suggestion" class="span-full">
+                <h2>Minimum-Waste Recipe Generator</h2>
+                
+                <div class="recipe-filters">
+                    <button class="filter-button active" data-filter="all">Semua Resep</button>
+                    <button class="filter-button" data-filter="kost">Menu Anak Kost 🧑‍🎓</button>
+                    <button class="filter-button" data-filter="quick">Cepat Saji</button>
+                    <button class="filter-button" data-filter="local">Lokal/Musiman 🌎</button>
+                </div>
+
+                <div id="recipe-output">
+                    </div>
+            </section>
+
+            <section id="location-recommendation" class="span-full">
+                <h2>LOKASI REKOMENDASI TEMPAT 📍</h2>
+                <p>Temukan toko bahan makanan di sekitar **Karah, Surabaya** untuk meminimalkan waste dan mendapatkan bahan musiman/lokal dengan lebih mudah.</p>
+                <div id="location-output" class="recipe-output-grid">
+                    </div>
             </section>
 
-            <section id="impact-section">
-                <h2>Dampak Saya </h2>
-                <div id="impact-metrics">
-                    <div class="metric-box">
-                        <p class="metric-value" id="total-saved">Rp 0</p>
-                        <p class="metric-label">Total Uang Dihemat (Estimasi)</p>
-                    </div>
-                    <div class="metric-box">
-                        <p class="metric-value" id="items-saved">0</p>
-                        <p class="metric-label">Item Makanan Diselamatkan</p>
-                    </div>
-                </div>
-            </section>
+        </div>
+    </main>
 
-            <section id="pantry-dashboard" class="span-full">
-                <div class="dashboard-header">
-                    <h2>Pantry Digital (Stok Anda)</h2>
-                    <p>Stok diurutkan secara Proaktif berdasarkan Kedaluwarsa Terdekat.</p>
-                    <div class="filter-controls">
-                        <label for="sort-by">Urutkan:</label>
-                        <select id="sort-by" onchange="renderPantry()">
-                            <option value="exp-asc">Kedaluwarsa Terdekat</option>
-                            <option value="name-asc">Nama A-Z</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="item-list">
-                    </div>
-            </section>
-            
-            <section id="recipe-suggestion" class="span-full">
-                <h2>Minimum-Waste Recipe Generator</h2>
-                
-                <div class="recipe-filters">
-                    <button class="filter-button active" data-filter="all">Semua Resep</button>
-                    <button class="filter-button" data-filter="kost">Menu Anak Kost 🧑‍🎓</button>
-                    <button class="filter-button" data-filter="quick">Cepat Saji</button>
-                </div>
+    <footer>
+        <p>© 2025 Tim Kejar Deadline. Tech for Impact.</p>
+    </footer>
 
-                <div id="recipe-output">
-                    </div>
-            </section>
-
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Tim Kejar Deadline. Tech for Impact.</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
