@@ -25,20 +25,12 @@
                 <form id="add-item-form">
                     <input type="text" id="item-name" placeholder="Nama Bahan (ex: Telur, Beras, Susu)" required>
                     
-                    <select id="item-category" required>
-                        <option value="" disabled selected>Pilih Kategori Simpan Kulkas (Untuk Estimasi ED)</option>
-                        <option value="Sayur Segar">Sayur Segar (ED ±5 hari)</option>
-                        <option value="Daging/Ikan">Daging/Ikan (ED ±5 hari)</option>
-                        <option value="Susu UHT/Telur">Susu/Telur (ED ±21 hari)</option>
-                        <option value="Kering">Kering (ED Jangka Panjang)</option>
-                    </select>
-
-                     <select id="item-category" required>
-                        <option value="" disabled selected>Pilih Kategori Non Kulkas (Untuk Estimasi ED)</option>
-                        <option value="Sayur Segar">Sayur Segar (ED ±2 hari)</option>
-                        <option value="Daging/Ikan">Daging/Ikan (ED ±12 jam)</option>
-                        <option value="Susu UHT/Telur">Susu/Telur (ED ±14 hari)</option>
-                        <option value="Kering">Kering (ED Jangka Panjang)</option>
+                                        <select id="item-category" required>
+                        <option value="" disabled selected>Pilih Kategori Penyimpanan</option>
+                        <option value="Sayur Segar">Sayur Segar</option>
+                        <option value="Daging/Ikan">Daging/Ikan</option>
+                        <option value="Susu UHT/Telur">Susu/Telur</option>
+                        <option value="Kering">Kering/Tahan Lama</option>
                     </select>
 
                     <input type="date" id="exp-date" required>
@@ -74,7 +66,7 @@
                     </div>
                 </div>
                 <div id="item-list">
-                    </div>
+                                    </div>
             </section>
             
             <section id="recipe-suggestion" class="span-full">
@@ -84,19 +76,19 @@
                     <button class="filter-button active" data-filter="all">Semua Resep</button>
                     <button class="filter-button" data-filter="kost">Menu Anak Kost 🧑‍🎓</button>
                     <button class="filter-button" data-filter="quick">Cepat Saji</button>
-                    <button class="filter-button" data-filter="local">Lokal/Musiman 🌎</button>
+                    <button class="filter-button" data-filter="local">Lokal/Musiman 🌎</button>
                 </div>
 
                 <div id="recipe-output">
-                    </div>
+                                    </div>
             </section>
 
-            <section id="location-recommendation" class="span-full">
-                <h2>LOKASI REKOMENDASI TEMPAT 📍</h2>
-                <p>Temukan toko bahan makanan di sekitar **Karah, Surabaya** untuk meminimalkan waste dan mendapatkan bahan musiman/lokal dengan lebih mudah.</p>
-                <div id="location-output" class="recipe-output-grid">
-                    </div>
-            </section>
+            <section id="location-recommendation" class="span-full">
+                <h2>LOKASI REKOMENDASI TEMPAT 📍</h2>
+                <p>Temukan toko bahan makanan di sekitar **Karah, Surabaya** untuk meminimalkan waste dan mendapatkan bahan musiman/lokal dengan lebih mudah.</p>
+                <div id="location-output" class="recipe-output-grid">
+                    </div>
+            </section>
 
         </div>
     </main>
