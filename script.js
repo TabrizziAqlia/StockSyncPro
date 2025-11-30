@@ -1,124 +1,325 @@
-// --- DATABASE MOCKUP ---
-let pantryItems = [
-    // Contoh Data Awal untuk Pitch: Menunjukkan semua status warna
-    { name: "Bayam Segar", expDate: "2025-12-03", qty: 1, estimatedPrice: 5000 },    // Merah
-    { name: "Susu UHT Kotak", expDate: "2025-12-08", qty: 2, estimatedPrice: 24000 }, // Merah
-    { name: "Keju Cheddar", expDate: "2025-12-18", qty: 1, estimatedPrice: 15000 },   // Kuning
-    { name: "Beras 5kg", expDate: "2026-06-15", qty: 1, estimatedPrice: 65000 }      // Hijau
-];
-
-let itemsSaved = 0; // Metrik untuk Impact
-const ITEM_PRICE_AVG = 15000; // Harga rata-rata item yang diselamatkan
-
-// --- LOGIKA PERHITUNGAN & STATUS ---
-
-function calculateDaysRemaining(expDate) {
-    const today = new Date();
-    // Reset waktu hari ini ke tengah malam untuk perhitungan akurat
-    today.setHours(0, 0, 0, 0); 
-    const expiry = new Date(expDate);
-    const timeDiff = expiry.getTime() - today.getTime();
-    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return daysDiff;
+/* Palet Warna: Hijau Impact, Biru Dongker (Outer Space), Kuning Aksen */
+:root {
+    --color-primary: #21a179;     /* Hijau Impact */
+    --color-secondary: #1A237E;   /* Biru Dongker (Outer Space/Header) */
+    --color-accent: #FFD740;      /* Kuning Aksen (Tombol Penting) */
+    --color-white: #ffffff;
+    --color-text: #333333;
+    --color-light-bg: #f8f8f8;
+    --radius-lg: 12px;
 }
 
-function getStatusClass(days) {
-    if (days <= 0) { // Sudah Kedaluwarsa
-        return 'status-merah'; 
-    } else if (days <= 7) {
-        return 'status-merah'; // Kedaluwarsa dalam 7 hari atau kurang
-    } else if (days <= 14) {
-        return 'status-kuning'; // Kedaluwarsa antara 8 hingga 14 hari
-    } else {
-        return 'status-hijau'; // Kedaluwarsa lebih dari 14 hari
+/* --------------------------------------------------- */
+/* GLOBAL STYLES & THEMATIC BACKGROUND */
+/* --------------------------------------------------- */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text);
+    /* Motif Galaksi/Bintang */
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    background-color: var(--color-secondary); 
+    line-height: 1.6;
+}
+
+main {
+    padding: 30px 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: var(--color-white);
+    padding: 25px;
+    margin-bottom: 0px; /* Diatur oleh grid gap */
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --------------------------------------------------- */
+/* HEADER & NAVIGATION (Outer Space Theme) */
+/* --------------------------------------------------- */
+
+header {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid var(--color-primary);
+}
+
+.header-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.rocket-icon {
+    font-size: 2.5em; 
+    margin-right: 15px;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+header h1 {
+    font-size: 2.8em;
+    margin: 0;
+    color: var(--color-accent);
+    font-weight: 900;
+    line-height: 1;
+}
+
+header p {
+    margin: 0;
+    font-style: italic;
+    color: #e0e0e0;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em;
+}
+
+/* --------------------------------------------------- */
+/* GRID LAYOUT UTAMA */
+/* --------------------------------------------------- */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Default 2 kolom */
+    gap: 20px;
+}
+
+.span-full {
+    grid-column: 1 / span 2; /* Dashboard dan Resep mengambil lebar penuh */
+}
+
+/* --------------------------------------------------- */
+/* FORM INPUT & BUTTONS */
+/* --------------------------------------------------- */
+
+#add-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"], input[type="date"], input[type="number"], select {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+button[type="submit"], .action-button {
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+button[type="submit"]:hover, .action-button:hover {
+    background-color: #178a63;
+}
+
+/* --------------------------------------------------- */
+/* PANTRY DASHBOARD (SMART SORTING) */
+/* --------------------------------------------------- */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+#item-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: 100px;
+}
+
+.item-card {
+    padding: 15px;
+    border-radius: 10px;
+    width: 180px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.item-card:hover {
+    transform: translateY(-3px);
+}
+
+.item-card strong {
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* LOGIKA VISUAL WARNA PERINGATAN (Novelty Non-AI) */
+.status-merah { 
+    background-color: #ffe6e6; 
+    border: 2px solid #e74c3c; 
+    color: #e74c3c;
+}
+
+.status-kuning { 
+    background-color: #fff9e6;
+    border: 2px solid #f39c12; 
+    color: #f39c12;
+}
+
+.status-hijau { 
+    background-color: #e6ffe6;
+    border: 2px solid #27ae60;
+    color: #27ae60;
+}
+
+.days-left {
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+}
+
+/* --------------------------------------------------- */
+/* IMPACT SECTION & RECIPE */
+/* --------------------------------------------------- */
+
+.metric-box {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--color-light-bg);
+    border-radius: 8px;
+    flex: 1;
+}
+
+.metric-value {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.metric-label {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+}
+
+.recipe-filters {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.filter-button:hover {
+    background-color: #e6ffe6;
+}
+
+.filter-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.recipe-output-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.recipe-card {
+    background-color: var(--color-light-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.recipe-card h3 {
+    margin-top: 0;
+    color: var(--color-secondary);
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--color-secondary);
+    color: #e0e0e0;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+/* --------------------------------------------------- */
+/* RESPONSIVENESS */
+/* --------------------------------------------------- */
+@media (max-width: 1024px) {
+    .content-grid {
+        grid-template-columns: 1fr; /* Kolom tunggal di layar tablet/kecil */
+    }
+    .span-full {
+        grid-column: 1;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
 
-// --- LOGIKA UTAMA: SMART SORTING & VISUALISASI ---
-
-function renderPantry() {
-    const sortBy = document.getElementById('sort-by').value;
-
-    // 1. Algoritma Smart Sorting (NON-AI NOVELTY)
-    if (sortBy === 'exp-asc') {
-        // Urutkan berdasarkan tanggal kedaluwarsa terdekat (asc)
-        pantryItems.sort((a, b) => new Date(a.expDate) - new Date(b.expDate));
-    } else if (sortBy === 'name-asc') {
-        pantryItems.sort((a, b) => a.name.localeCompare(b.name));
+@media (max-width: 600px) {
+    .item-card {
+        width: 100%;
+        max-width: none;
     }
-
-    const listContainer = document.getElementById('item-list');
-    listContainer.innerHTML = '';
-
-    pantryItems.forEach((item, index) => {
-        const daysLeft = calculateDaysRemaining(item.expDate);
-        const statusClass = getStatusClass(daysLeft);
-        const daysText = daysLeft <= 0 ? 'KEDALUWARSA!' : `Sisa Hari: ${daysLeft}`;
-
-        const itemCard = document.createElement('div');
-        itemCard.className = `item-card ${statusClass}`;
-        itemCard.setAttribute('data-index', index); // Untuk identifikasi di masa depan
-        
-        itemCard.innerHTML = `
-            <strong>${item.name}</strong> (${item.qty})<br>
-            <small>ED: ${item.expDate}</small><br>
-            <span class="days-left">${daysText}</span>
-        `;
-        listContainer.appendChild(itemCard);
-    });
-    
-    updateImpactMetrics();
-}
-
-// --- LOGIKA PENAMBAHAN ITEM (NON-AI) ---
-
-document.getElementById('add-item-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('item-name').value;
-    const date = document.getElementById('exp-date').value;
-    const qty = parseInt(document.getElementById('quantity').value);
-    const category = document.getElementById('item-category').value;
-    
-    // Asumsi harga acak untuk simulasi, idealnya dari database
-    const estimatedPrice = Math.floor(Math.random() * 50000) + 5000; 
-
-    if (name && date && qty > 0 && category) {
-        pantryItems.push({ 
-            name: name, 
-            expDate: date, 
-            qty: qty,
-            estimatedPrice: estimatedPrice
-        });
-        renderPantry();
-        this.reset();
-    } else {
-        alert("Mohon isi semua data dengan benar.");
+    .metric-box {
+        padding: 10px;
     }
-});
-
-// --- LOGIKA DAMPAK SAYA (IMPACT METRICS) ---
-
-function updateImpactMetrics() {
-    // 1. Total Uang Dihemat (Simulasi)
-    // Di dunia nyata: hitung nilai item yang telah ditandai 'Cooked' dari stok Merah/Kuning
-    // Untuk Pitch: hitung nilai total item yang telah diselamatkan (itemsSaved)
-    const totalSavedValue = itemsSaved * ITEM_PRICE_AVG;
-    document.getElementById('total-saved').textContent = `Rp ${totalSavedValue.toLocaleString('id-ID')}`;
-    
-    // 2. Item Makanan Diselamatkan
-    document.getElementById('items-saved').textContent = itemsSaved;
+    header h1 {
+        font-size: 2em;
+    }
+    .rocket-icon {
+        font-size: 2em;
+        margin-right: 10px;
+    }
+    .header-content {
+        padding: 0 20px;
+    }
+    .recipe-filters {
+        justify-content: space-between;
+    }
 }
-
-// Tambahkan Event Listener ke Tombol 'Masak Resep Ini' (Simulasi)
-document.querySelector('#recipe-suggestion .action-button').addEventListener('click', () => {
-    // Di dunia nyata: hapus/kurangi stok item dari array
-    // Untuk Pitch: tambahkan ke metrik Impact
-    itemsSaved += 2; // Asumsi 2 item berhasil diselamatkan
-    alert("Hebat! Anda berhasil menyelamatkan 2 item dari pemborosan. Cek Dampak Saya!");
-    renderPantry(); // Update metrics
-});
-
-
-// Jalankan render pertama kali saat website dimuat
-document.addEventListener('DOMContentLoaded', renderPantry);
